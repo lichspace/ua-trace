@@ -1,0 +1,35 @@
+{
+  "name": "ua-trace",
+  "version": "1.0.0",
+  "description": " trace user action when user browse webpage",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha xx",
+    "start": "webpack-dev-server --env.NODE_ENV=development --open",
+    "build": "webpack --env.NODE_ENV=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lichspace/ua-trace.git"
+  },
+  "keywords": [
+    "trace",
+    "user",
+    "action",
+    "web"
+  ],
+  "author": "tangentguo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lichspace/ua-trace/issues"
+  },
+  "homepage": "https://github.com/lichspace/ua-trace#readme",
+  "dependencies": {
+    "delegate": "^3.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
