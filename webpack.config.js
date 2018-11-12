@@ -4,19 +4,35 @@ module.exports = env=>{
 
     let devConfig = {};
     if(env.NODE_ENV==='development'){
-        devConfig.devtool = 'inline-source-map'
+        devConfig = {...{
+                devtool:'inline-source-map',
+                devServer: {
+                    index:'./example/index.html',
+                    contentBase: './dist'
+                },
+            }};
     }
 
     return {
         mode:env.NODE_ENV,
         entry: {index:'./src/index.js'},
         ...devConfig,
-        devServer: {
-            contentBase: './dist'
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loader: "eslint-loader",
+                    options: {
+                        // eslint options (if necessary)
+                        configFile:'./.eslintrc.json'
+                    }
+                },
+            ],
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
-                filename: '[name].js'
+            filename: '[name].js'
         }
     }
 };
