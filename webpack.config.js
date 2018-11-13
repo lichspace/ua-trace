@@ -7,8 +7,7 @@ module.exports = env=>{
         devConfig = {...{
                 devtool:'inline-source-map',
                 devServer: {
-                    index:'./example/index.html',
-                    contentBase: './dist'
+                    contentBase: './example'
                 },
             }};
     }
@@ -16,6 +15,11 @@ module.exports = env=>{
     return {
         mode:env.NODE_ENV,
         entry: {index:'./src/index.js'},
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: '[name].js',
+            publicPath:'./example/'
+        },
         ...devConfig,
         module: {
             rules: [
@@ -29,10 +33,6 @@ module.exports = env=>{
                     }
                 },
             ],
-        },
-        output: {
-            path: path.resolve(__dirname, 'dist'),
-            filename: '[name].js'
         }
     }
 };
