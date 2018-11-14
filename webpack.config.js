@@ -8,7 +8,7 @@ module.exports = env=>{
                 devtool:'inline-source-map',
                 devServer: {
                     index:'index.html',
-                    contentBase: ['./example','./dist']
+                    contentBase: './example'
                 },
             }};
     }
@@ -32,8 +32,7 @@ module.exports = env=>{
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: '[name].js',
-            publicPath:'/example/'
+            filename: '[name].js'
         },
     }
 };
