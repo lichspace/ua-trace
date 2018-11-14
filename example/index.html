@@ -14,11 +14,25 @@
     }
 </style>
 <div class="a">
-    <div class="b" data-uatrace="{a:1}">
-        <li><a href="" target="_blank">a</a></li>
-        <li><span>span</span></li>
+    <div class="b ua-trace" data-uatrace='{"explore":"once","a":1,"b":2}'>
+        <li ><a href="" target="_blank">a</a></li>
+        <li class="ua-trace"><span>span</span></li>
     </div>
 </div>
 <script src="/index.js"></script>
+<script>
+    console.log(UATrace.version)
+
+    let boss6014 = new UATrace({_url:'www.qq.com',id:6014})
+    boss6014.subscribe()
+    boss6014.report({a:'test'})
+
+    let boss122 = new UATrace({_url:'www.qq.com',id:122})
+    boss122.subscribe()
+    boss122.report({a:'122'})
+
+
+
+</script>
 </body>
 </html>

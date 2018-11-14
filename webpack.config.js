@@ -25,6 +25,7 @@ module.exports = env=>{
                     loader: "eslint-loader",
                     options: {
                         // eslint options (if necessary)
+                        fix:true,
                         configFile:'./.eslintrc.json'
                     }
                 },
