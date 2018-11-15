@@ -41,6 +41,13 @@ class UATrace {
         debug('ua_trace welcome!')
     }
 
+    debug(close){
+        let ls = window.localStorage
+        if(ls){
+            close===false?ls.removeItem('debug'):ls.setItem('debug','ua-trace')
+        }
+    }
+
     subscribe(){
         Emitter.on('ua-trace-click',data=>{
             this.report({...data,...this.config})
