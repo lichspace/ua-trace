@@ -1,5 +1,5 @@
 # ua-trace
-A resolution of collect dom data-attr and merge with config report(multi)
+A resolution of collect dom data-attr and merge with config report(multi)，Works in web browsers.
 
 # Install
  you can get it on npm

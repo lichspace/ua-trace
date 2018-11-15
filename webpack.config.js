@@ -22,12 +22,24 @@ module.exports = env=>{
                 {
                     test: /\.js$/,
                     exclude: /node_modules/,
-                    loader: "eslint-loader",
-                    options: {
-                        // eslint options (if necessary)
-                        fix:true,
-                        configFile:'./.eslintrc.json'
-                    }
+                    use:[
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: ['@babel/preset-env']
+                            }
+                        },
+                        {
+                            loader: "eslint-loader",
+                            options: {
+                                // eslint options (if necessary)
+                                fix:true,
+                                configFile:'./.eslintrc.json'
+                            }
+                        }
+
+                    ]
+
                 },
             ],
         },
