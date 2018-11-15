@@ -15,7 +15,7 @@ module.exports = env=>{
 
     return {
         mode:env.NODE_ENV,
-        entry: {index:'./src/index.js'},
+        entry: {"ua-trace":'./src/index.js'},
         ...devConfig,
         module: {
             rules: [

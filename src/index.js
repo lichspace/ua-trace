@@ -70,7 +70,7 @@ class UATrace {
     imageSrcGet(obj){
         let src = this.config._url+'?'+this.objToParams(obj)
         debug(src)
-        //new window.Image(1,1).src = src
+        new window.Image(1,1).src = src
     }
 
 }

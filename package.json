@@ -1,7 +1,7 @@
 {
   "name": "ua-trace",
-  "version": "1.0.0",
-  "description": " trace user action when user browse webpage",
+  "version": "1.0.1",
+  "description": "A resolution of collect dom data-attr and merge with config report(multi)",
   "main": "index.js",
   "scripts": {
     "test": "mocha xx",

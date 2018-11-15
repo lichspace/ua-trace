@@ -16,8 +16,8 @@ module.exports = {
                 let arr = jsonStr.slice(1, -1).split(',')
                 arr.map(v => {
                     if (v) {
-                        let kv = v.split(':')
-                        obj[kv[0].trim()] = kv[1]
+                        let kv = v.match(/(\w+)['":]+([^'"]+)/)
+                        obj[kv[1]] = kv[2]
                     }
                 })
                 return obj

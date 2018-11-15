@@ -16,18 +16,20 @@
 <div class="a">
     <div class="b ua-trace" data-uatrace='{"explore":"once","a":1,"b":2}'>
         <li ><a href="" target="_blank">a</a></li>
-        <li class="ua-trace"><span>span</span></li>
+        <li class="ua-trace" data-uatrace="{test:222,sop:'span','url':'https://webpack.docschina.org/guides/author-libraries/#%E6%9A%B4%E9%9C%B2-library'}">
+            <span>span</span>
+        </li>
     </div>
 </div>
-<script src="/index.js"></script>
+<script src="/ua-trace.js"></script>
 <script>
-    let boss6014 = new UATrace({_url:'www.qq.com',id:6014})
+    let boss6014 = new UATrace({_url:'http://report.com',id:6014})
     boss6014.subscribe()
-    boss6014.report({a:'test'})
+    boss6014.report({name:'tangentguo'})
 
-    let boss122 = new UATrace({_url:'www.qq.com',id:122})
+    let boss122 = new UATrace({_url:'http://report2.com',id:122})
     boss122.subscribe()
-    boss122.report({a:'122'})
+    boss122.report({name:'hahha'})
 
 
 
