@@ -87,4 +87,4 @@ delegate('.ua-trace', 'click', function (e) {
 }, false)
 
 
-module.exports = window.UATrace = UATrace
+module.exports  = UATrace

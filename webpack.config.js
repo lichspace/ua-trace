@@ -33,7 +33,9 @@ module.exports = env=>{
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: '[name].js'
+            filename: '[name].js',
+            library:'UATrace',
+            libraryTarget:'umd'
         },
     }
-};
+}
