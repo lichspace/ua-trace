@@ -1,5 +1,5 @@
 # ua-trace
-A resolution of collecttion by dom attribute and merge with config then report(multi)，monitor inview and click event, Works in web browsers.
+A resolution of collect dom attribute and merge with config then report(multi)，monitor appears in viewport  and click event, Works in web browsers.
 
 # Install
  you can get it on npm
@@ -21,7 +21,7 @@ Browser`umd`
 
 # Usage
 
-The ua-trace lib do a thing, that if a element has `data-ua-trace` ,  when it view in window or click,it value will be parse to json and merge with the config you identified
+The ua-trace lib do a thing, that if a element has `data-ua-trace` ,  when it appear in window or click,it value will be parse to json and merge with the config you identified
 
 ## Class UATrace(config[object])
 
@@ -55,7 +55,7 @@ update your config
 
 ## UATrace.subscribe([Function(data,type)])
 - `data` is the data-ua-trace parse to json
-- `type` click or expose
+- `type` click or expose,expose only fire once
 - return object or false,when false not initiate request[get]
 
 ## UATrace.report(obj)
