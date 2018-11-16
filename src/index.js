@@ -1,11 +1,14 @@
 const debug = require('debug')('ua-trace')
 let delegate = require('delegate')
 let json = require('./lib/json')
+let inview = require('./lib/invew')
+let debounce = require('./lib/debounce')
 let EventEmitter = require('events')
 let Emitter = new EventEmitter()
+
 //tool
 let getDataFromDataSet = target=>{
-    let data = target.dataset.uatrace
+    let data = target.getAttribute('data-uatrace')
     if (!data) {
         return debug('no data-uatrace')
     }
@@ -48,9 +51,10 @@ class UATrace {
         }
     }
 
-    subscribe(){
-        Emitter.on('ua-trace-click',data=>{
-            this.report({...data,...this.config})
+    subscribe(cb){
+        Emitter.on('ua-trace-click',(data,type)=>{
+            let newData = cb?cb.apply(null,arguments):data
+            this.report({...this.config,...newData})
         })
     }
 
@@ -60,13 +64,13 @@ class UATrace {
         }
     }
 
-    //过滤掉_url
+    //过滤掉_url,下划线开头为内置变量
     objToParams(params){
         let str = '';
         toPairs(params)
             .sort()
             .map(function(param) {
-                if (param[1] !== undefined&&param[0]!=='_url') {
+                if (param[1] !== undefined&&param[0]!=='_url'&&param[0]!=='_expose') {
                     if (str !== '') str += '&';
                     str += param[0] + '=' + encodeURIComponent(param[1]);
                 }
@@ -81,8 +85,8 @@ class UATrace {
     }
 
 }
-
-delegate('.ua-trace', 'click', function (e) {
+let selctor = '*[data-uatrace]'
+delegate(selctor, 'click', function (e) {
     //console.log(e)
     let target = e.delegateTarget
     let data = getDataFromDataSet(target)
@@ -90,8 +94,24 @@ delegate('.ua-trace', 'click', function (e) {
         return debug('no data-uatrace')
     }
     debug(data)
-    Emitter.emit('ua-trace-click',data)
+    Emitter.emit('ua-trace-click',data,'click')
 }, false)
+
+let show = ()=>{
+    let elms = document.querySelectorAll(selctor)
+    Array.prototype.slice.call(elms).map(elm=>{
+        if(elm.hasAttribute('data-uatrace')&&!elm.hasAttribute('data-uatrace-expose')&&inview(elm)){
+            let data = getDataFromDataSet(elm)
+            if(data._expose){
+                Emitter.emit('ua-trace-click',data, 'expose')
+                elm.setAttribute('data-uatrace-expose',1)
+            }
+        }
+    })
+}
+
+setTimeout(show,10)
+window.addEventListener('scroll', debounce(show));
 
 
 module.exports  = UATrace

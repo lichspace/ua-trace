@@ -14,22 +14,29 @@
     }
 </style>
 <div class="a">
-    <div class="b ua-trace" data-uatrace='{"explore":"once","a":1,"b":2}'>
+    <div class="b" data-uatrace='{"_expose":"1","sop":"clickb","b":2}'>
         <li ><a href="" target="_blank">a</a></li>
-        <li class="ua-trace" data-uatrace="{test:222,sop:'span','url':'https://webpack.docschina.org/guides/author-libraries/#%E6%9A%B4%E9%9C%B2-library'}">
+        <li data-uatrace="{test:222,sop:'span','url':'https://webpack.docschina.org'}">
             <span>span</span>
         </li>
     </div>
 </div>
 <script src="/ua-trace.js"></script>
 <script>
-    let boss6014 = new UATrace({_url:'http://report.com',id:6014})
-    boss6014.subscribe()
+    let imageGif = '/report.gif'
+    let boss6014 = new UATrace({_url:imageGif,id:6014})
+    boss6014.subscribe((data,type)=>{
+        data.text = 'append'
+        if(type==='expose'){
+            data.expose = 'expose'
+        }
+        return data
+    })
     boss6014.report({name:'tangentguo'})
 
-    let boss122 = new UATrace({_url:'http://report2.com',id:122})
-    boss122.subscribe()
-    boss122.report({name:'hahha'})
+    // let boss122 = new UATrace({_url:imageGif,id:122})
+    // boss122.subscribe()
+    // boss122.report({name:'hahha'})
 
     console.log(boss6014.version)
     boss6014.debug()
