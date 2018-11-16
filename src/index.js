@@ -35,6 +35,10 @@ class UATrace {
         this.config = { ...config }
     }
 
+    update(config){
+        this.config = config
+    }
+
     get version(){
         return '1.0.0'
     }
@@ -52,14 +56,15 @@ class UATrace {
                 console.warn('【ua-trace】data-ua-trace value cont parse to json')
             }
             let newData = cb?cb(data,type):data
-            this.report({...this.config,...newData},type)
+            newData&&this.report(newData,type)
         })
     }
 
     report(obj,type){
         if ( typeof(obj)==='object' ){
             debug(`【${type||'JS'}】`,obj)
-            this.imageSrcGet(obj)
+            let newData = {...this.config,...obj}
+            this.imageSrcGet(newData)
         }
     }
 
