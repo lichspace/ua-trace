@@ -35,18 +35,18 @@ HTML
 
 JS
 ```
- let imageGif = '/report.gif'
- let boss6014 = new UATrace({_url:imageGif,id:6014})
- boss6014.report({name:'tangentguo'})
- //Request URL: http://localhost:8080/report.gif?name=tangentguo
-    boss6014.subscribe((data,type)=>{
-        if(type==='expose'){
-            data.expose = 'expose'
-        }
-        return data
-        //if return false will not request
-    })
-  //when subscribed click or inview will Request URL: http://report.com?a=1&b=2&expose=expose&id=6014
+let imageGif = '/report.gif'
+let boss6014 = new UATrace({_url:imageGif,id:6014})
+boss6014.report({name:'tangentguo'})
+//Request URL: http://localhost:8080/report.gif?name=tangentguo
+boss6014.subscribe((data,type)=>{
+    if(type==='expose'){
+        data.expose = 'expose'
+    }
+    return data
+    //if return false will not request
+})
+//when subscribed click or inview will Request URL: http://report.com?a=1&b=2&expose=expose&id=6014
 
 ```
 
