@@ -12,21 +12,22 @@
     .b{
         width: 100px;height: 100px;background: red;
     }
+    .c{background: antiquewhite;margin-top: 1000px;}
 </style>
 <div class="a">
-    <div class="b" data-uatrace='{"_expose":"1","sop":"clickb","b":2}'>
+    <div class="b" data-ua-trace='{"sop":"clickb","b":2}'>
         <li ><a href="" target="_blank">a</a></li>
-        <li data-uatrace="{test:222,sop:'span','url':'https://webpack.docschina.org'}">
+        <li data-ua-trace="{test:222,sop:'span','url':'https://webpack.docschina.org'}">
             <span>span</span>
         </li>
     </div>
+    <div class="c b" data-ua-trace="{sop:'bottom'}"></div>
 </div>
 <script src="/ua-trace.js"></script>
 <script>
     let imageGif = '/report.gif'
     let boss6014 = new UATrace({_url:imageGif,id:6014})
     boss6014.subscribe((data,type)=>{
-        data.text = 'append'
         if(type==='expose'){
             data.expose = 'expose'
         }

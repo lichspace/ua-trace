@@ -8,9 +8,9 @@ let Emitter = new EventEmitter()
 
 //tool
 let getDataFromDataSet = target=>{
-    let data = target.getAttribute('data-uatrace')
+    let data = target.getAttribute('data-ua-trace')
     if (!data) {
-        return debug('no data-uatrace')
+        return debug('no data-ua-trace')
     }
     return json.parse(data)
 }
@@ -33,15 +33,10 @@ class UATrace {
             throw new Error('ua-trace: config object must contain property [_url]')
         }
         this.config = { ...config }
-        this.init()
     }
 
     get version(){
         return '1.0.0'
-    }
-
-    init (){
-        debug('ua_trace welcome!')
     }
 
     debug(close){
@@ -50,17 +45,21 @@ class UATrace {
             close===false?ls.removeItem('debug'):ls.setItem('debug','ua-trace')
         }
     }
-
+    //数据接收并处理->report
     subscribe(cb){
-        Emitter.on('ua-trace-click',(data,type)=>{
-            let newData = cb?cb.apply(null,arguments):data
-            this.report({...this.config,...newData})
+        Emitter.on('reportAll',(data,type)=>{
+            if(!isObject(data)) {
+                console.warn('【ua-trace】data-ua-trace value cont parse to json')
+            }
+            let newData = cb?cb(data,type):data
+            this.report({...this.config,...newData},type)
         })
     }
 
-    report(obj){
+    report(obj,type){
         if ( typeof(obj)==='object' ){
-            this.imageSrcGet({...obj,...this.config})
+            debug(`【${type||'JS'}】`,obj)
+            this.imageSrcGet(obj)
         }
     }
 
@@ -70,7 +69,7 @@ class UATrace {
         toPairs(params)
             .sort()
             .map(function(param) {
-                if (param[1] !== undefined&&param[0]!=='_url'&&param[0]!=='_expose') {
+                if (param[1] !== undefined&&param[0]!=='_url') {
                     if (str !== '') str += '&';
                     str += param[0] + '=' + encodeURIComponent(param[1]);
                 }
@@ -80,32 +79,28 @@ class UATrace {
 
     imageSrcGet(obj){
         let src = this.config._url+'?'+this.objToParams(obj)
-        debug(src)
         new window.Image(1,1).src = src
     }
 
 }
-let selctor = '*[data-uatrace]'
-delegate(selctor, 'click', function (e) {
+let selector = '*[data-ua-trace]'
+delegate(selector, 'click', function (e) {
     //console.log(e)
     let target = e.delegateTarget
     let data = getDataFromDataSet(target)
-    if (!data) {
-        return debug('no data-uatrace')
-    }
     debug(data)
-    Emitter.emit('ua-trace-click',data,'click')
+    Emitter.emit('reportAll',data,'click')
 }, false)
 
 let show = ()=>{
-    let elms = document.querySelectorAll(selctor)
+    let elms = document.querySelectorAll(selector)
     Array.prototype.slice.call(elms).map(elm=>{
-        if(elm.hasAttribute('data-uatrace')&&!elm.hasAttribute('data-uatrace-expose')&&inview(elm)){
+        //没曝光过，并且有data-uatrace,可见
+        if(!elm.exposed&&inview(elm)){
             let data = getDataFromDataSet(elm)
-            if(data._expose){
-                Emitter.emit('ua-trace-click',data, 'expose')
-                elm.setAttribute('data-uatrace-expose',1)
-            }
+            debug('【get expose data】', data)
+            Emitter.emit('reportAll',data, 'expose')
+            elm.exposed = 1
         }
     })
 }
