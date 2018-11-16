@@ -25,7 +25,7 @@ The ua-trace lib do a thing, that if a element has `data-ua-trace` ,  when it ap
 
 ## Class UATrace(config[object])
 
-config must has `_url` property,it will be request_
+config must has `_url` property,it will be request
 
 HTML
 ```
