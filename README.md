@@ -54,7 +54,7 @@ boss6014.subscribe((data,type)=>{
 
 ## static UATrace.debug()
 -  default open
-- 'close' 关闭
+- 'close' close
 
 ## UATrace.update(config)
 update your config
