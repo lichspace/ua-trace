@@ -4,7 +4,7 @@
   "description": "A resolution of collect dom data-attr and merge with config report(multi)，Works in web browsers.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha xx",
+    "test": "mocha",
     "start": "webpack-dev-server --env.NODE_ENV=development --open",
     "build": "webpack --env.NODE_ENV=production"
   },
@@ -40,6 +40,7 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"

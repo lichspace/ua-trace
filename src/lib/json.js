@@ -16,13 +16,15 @@ module.exports = {
                 let arr = jsonStr.slice(1, -1).split(',')
                 arr.map(v => {
                     if (v) {
-                        let kv = v.match(/(\w+)['":]+([^'"]+)/)
-                        obj[kv[1]] = kv[2]
+                        let kv = v.match(/(\w+).*:(['"]*)([^'"]*?)['"]*$/)
+                        if(kv){
+                            obj[kv[1]] = kv[2]?kv[3]:(kv[3]|0)
+                        }
                     }
                 })
                 return obj
             }
-            return str
+            return {}
         }
     }
 }
