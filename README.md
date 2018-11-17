@@ -50,16 +50,24 @@ boss6014.subscribe((data,type)=>{
 
 ```
 
+## static UATrace.version()
+
+## static UATrace.debug()
+-  default open
+- 'close' 关闭
+
 ## UATrace.update(config)
 update your config
 
 ## UATrace.subscribe([Function(data,type)])
 - `data` is the data-ua-trace parse to json
-- `type` click or expose,expose only fire once
-- return object or false,when false not initiate request[get]
+- `type` is [click or expose],expose only fire once
+- you can define a function change data by `UATrace.subscribe`, when return false do not initiate [GET]
 
-## UATrace.report(obj)
+## UATrace.report(object)
 report with js
+
+## UATrace.update(config)
 
 ## priority config
 `subscribe return` > `data-ua-trace` > `config`

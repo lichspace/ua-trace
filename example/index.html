@@ -25,6 +25,8 @@
 </div>
 <script src="/ua-trace.js"></script>
 <script>
+    console.log('ua-trace version:',UATrace.version())
+    UATrace.debug()
     let imageGif = '/report.gif'
     let boss6014 = new UATrace({_url:imageGif,id:6014})
     boss6014.subscribe((data,type)=>{
@@ -39,9 +41,6 @@
     // let boss122 = new UATrace({_url:imageGif,id:122})
     // boss122.subscribe()
     // boss122.report({name:'hahha'})
-
-    console.log(boss6014.version)
-    boss6014.debug()
 
 </script>
 </body>

@@ -5,6 +5,8 @@ let inview = require('./lib/invew')
 let debounce = require('./lib/debounce')
 let EventEmitter = require('events')
 let Emitter = new EventEmitter()
+let imageElement = new window.Image(1,1)
+let debugColors = require('./lib/colors')
 
 //tool
 let getDataFromDataSet = target=>{
@@ -35,19 +37,19 @@ class UATrace {
         this.config = { ...config }
     }
 
-    update(config){
-        this.config = config
-    }
-
-    get version(){
+    static version(){
         return '1.0.0'
     }
 
-    debug(close){
+    static debug(close){
         let ls = window.localStorage
         if(ls){
             close===false?ls.removeItem('debug'):ls.setItem('debug','ua-trace')
         }
+    }
+
+    update(config){
+        this.config = config
     }
     //数据接收并处理->report
     subscribe(cb){
@@ -62,8 +64,8 @@ class UATrace {
 
     report(obj,type){
         if ( typeof(obj)==='object' ){
-            debug(`【${type||'JS'}】`,obj)
             let newData = {...this.config,...obj}
+            debug(`%c report：${type||'JS'} `,debugColors.success,newData)
             this.imageSrcGet(newData)
         }
     }
@@ -83,8 +85,9 @@ class UATrace {
     }
 
     imageSrcGet(obj){
+        obj._rand = new Date().getTime()
         let src = this.config._url+'?'+this.objToParams(obj)
-        new window.Image(1,1).src = src
+        imageElement.src = src
     }
 
 }
@@ -93,7 +96,6 @@ delegate(selector, 'click', function (e) {
     //console.log(e)
     let target = e.delegateTarget
     let data = getDataFromDataSet(target)
-    debug(data)
     Emitter.emit('reportAll',data,'click')
 }, false)
 
@@ -103,7 +105,6 @@ let show = ()=>{
         //没曝光过，并且有data-uatrace,可见
         if(!elm.exposed&&inview(elm)){
             let data = getDataFromDataSet(elm)
-            debug('【get expose data】', data)
             Emitter.emit('reportAll',data, 'expose')
             elm.exposed = 1
         }
