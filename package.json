@@ -1,8 +1,8 @@
 {
   "name": "ua-trace",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A resolution of collect dom data-attr and merge with config report(multi)，Works in web browsers.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "mocha",
     "start": "webpack-dev-server --env.NODE_ENV=development --open",
