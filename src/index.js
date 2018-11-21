@@ -1,4 +1,4 @@
-const debug = require('debug')('ua-trace')
+const debug = require('debug/dist/debug')('ua-trace')
 let delegate = require('delegate')
 let json = require('./lib/json')
 let inview = require('./lib/invew')

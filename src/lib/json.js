@@ -1,4 +1,4 @@
-const debug = require('debug')('ua-trace')
+const debug = require('debug/dist/debug')('ua-trace')
 const debugColors = require('./colors')
 module.exports = {
     parse: str => {
