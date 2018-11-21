@@ -1,6 +1,8 @@
 # ua-trace
 A resolution of collect dom attribute and merge with config then report(multi)，monitor appears in viewport  and click event, Works in web browsers.
 
+[demo](http://lichspace.github.io/ua-trace-demo/)
+
 # Install
  you can get it on npm
  ```
@@ -74,7 +76,7 @@ report with js
 
 ## Browser Support
 
-| <img src="https://clipboardjs.com/assets/images/chrome.png" width="48px" height="48px" alt="Chrome logo"> | <img src="https://clipboardjs.com/assets/images/edge.png" width="48px" height="48px" alt="Edge logo"> | <img src="https://clipboardjs.com/assets/images/firefox.png" width="48px" height="48px" alt="Firefox logo"> | <img src="https://clipboardjs.com/assets/images/ie.png" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="https://clipboardjs.com/assets/images/opera.png" width="48px" height="48px" alt="Opera logo"> | <img src="https://clipboardjs.com/assets/images/safari.png" width="48px" height="48px" alt="Safari logo"> |
+| <img src="http://lichspace.github.io/ua-trace-demo/chrome.png" width="48px" height="48px" alt="Chrome logo"> | <img src="http://lichspace.github.io/ua-trace-demo/ieage.png" width="48px" height="48px" alt="Edge logo"> | <img src="http://lichspace.github.io/ua-trace-demo/firefox.png" width="48px" height="48px" alt="Firefox logo"> | <img src="http://lichspace.github.io/ua-trace-demo/IE.png" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="http://lichspace.github.io/ua-trace-demo/opera.png" width="48px" height="48px" alt="Opera logo"> | <img src="http://lichspace.github.io/ua-trace-demo/saferi.png" width="48px" height="48px" alt="Safari logo"> |
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | Latest ✔ | Latest ✔ | Latest ✔ | 9+ ✔ | Latest ✔ | Latest ✔ |
 
