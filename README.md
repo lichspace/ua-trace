@@ -1,6 +1,9 @@
 # ua-trace
 A resolution of collect dom attribute and merge with config then report(multi)，monitor appears in viewport  and click event, Works in web browsers.
 
+GET前端上报,主要解决滚动曝光及多个上报问题。
+
+
 [demo](http://lichspace.github.io/ua-trace-demo/)
 
 # Install
@@ -25,14 +28,21 @@ Browser`umd`
 
 The ua-trace lib do a thing, that if a element has `data-ua-trace` ,  when it appear in window or click,it value will be parse to json and merge with the config you identified
 
+ua-trace只做一件事情，在曝光或点击的时候，把DOM里`data-ua-trace`的JSON配置与预定义的基础配置合并发送到订阅函数里
+
 ## Class UATrace(config[object])
 
 config must has `_url` property,it will be request
+config是基础配置，初始化config里必须包含`_url`这个是上报的地址
 
 HTML
 ```
 //Element　must has attrbute data-ua-trace
 <div data-ua-trace='{"explore":"once","a":1,"b":2}'></div>
+
+//or js react
+<div data-ua-trace={JSON.stringify({"explore":"once","a":1,"b":2})}'></div>
+
 ```
 
 JS
@@ -72,6 +82,7 @@ report with js
 ## UATrace.update(config)
 
 ## priority config
+配置的优先级
 `subscribe return` > `data-ua-trace` > `config`
 
 ## Browser Support
