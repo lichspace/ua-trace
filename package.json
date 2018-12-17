@@ -1,5 +1,5 @@
 {
-  "name": "ua-trace",
+  "name": "@tencent/ua-trace",
   "version": "1.0.6",
   "description": "A resolution of collect dom data-attr and merge with config report(multi)，Works in web browsers.",
   "main": "dist/ua-trace.js",
