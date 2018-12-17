@@ -30,10 +30,11 @@ The ua-trace lib do a thing, that if a element has `data-ua-trace` ,  when it ap
 
 ua-trace只做一件事情，在曝光或点击的时候，把DOM里`data-ua-trace`的JSON配置与预定义的基础配置合并发送到订阅函数里
 
-## Class UATrace(config[object])
+## Class UATrace(option[object],config[object])
+- option.url to report 上报地址
+- option.method default get with image,if post will use sendBeacon 上报方式
+- config the base config to report 基础配置
 
-config must has `_url` property,it will be request
-config是基础配置，初始化config里必须包含`_url`这个是上报的地址
 
 HTML
 ```
@@ -47,17 +48,18 @@ HTML
 
 JS
 ```
-let imageGif = '/report.gif'
-let boss6014 = new UATrace({_url:imageGif,id:6014})
-boss6014.report({name:'tangentguo'})
-//Request URL: http://localhost:8080/report.gif?name=tangentguo
-boss6014.subscribe((data,type)=>{
-    if(type==='expose'){
-        data.expose = 'expose'
-    }
-    return data
-    //if return false will not request
-})
+console.log('ua-trace version:',UATrace.version())
+    UATrace.debug()
+    let imageGif = '/report.gif'
+    let boss6014 = new UATrace({url:imageGif,method:'post'},{id:6014})
+    boss6014.subscribe((data,type)=>{
+        if(type==='expose'){
+            data.expose = 'expose'
+        }
+        return data
+        //if return false will not request
+    })
+    boss6014.report({name:'tangentguo'})
 //when subscribed click or inview will Request URL: http://report.com?a=1&b=2&expose=expose&id=6014
 
 ```
@@ -65,6 +67,7 @@ boss6014.subscribe((data,type)=>{
 ## static UATrace.version()
 
 ## static UATrace.debug()
+equal localStorage.setItem('debug', 'ua-trace')
 -  default open
 - 'close' close
 

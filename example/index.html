@@ -25,10 +25,9 @@
 </div>
 <script src="/ua-trace.js"></script>
 <script>
-    console.log('ua-trace version:',UATrace.version())
     UATrace.debug()
     let imageGif = '/report.gif'
-    let boss6014 = new UATrace({_url:imageGif,id:6014})
+    let boss6014 = new UATrace({url:imageGif,method:'post'},{id:6014})
     boss6014.subscribe((data,type)=>{
         if(type==='expose'){
             data.expose = 'expose'

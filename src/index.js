@@ -29,15 +29,15 @@ let toPairs = obj => {
 }
 
 class UATrace {
-    constructor (config) {
-        if (!isObject(config) || !config['_url']) {
-            throw new Error('ua-trace: config object must contain property [_url]')
+    constructor (option,config={}) {
+        if (!isObject(option) || !isObject(config)) {
+            throw new Error('ua-trace: option and config must be object')
         }
-        this.config = { ...config }
-    }
-
-    static version () {
-        return '1.0.0'
+        if (!option.url) {
+            throw new Error('ua-trace: option must contain property [url]')
+        }
+        this.option = option
+        this.config = config
     }
 
     static debug (close) {
@@ -75,7 +75,7 @@ class UATrace {
         toPairs(params)
             .sort()
             .map(function (param) {
-                if (param[1] !== undefined && param[0] !== '_url') {
+                if (param[1] !== undefined) {
                     if (str !== '') str += '&'
                     str += param[0] + '=' + encodeURIComponent(param[1])
                 }
@@ -85,9 +85,9 @@ class UATrace {
 
     imageSrcGet (obj) {
         obj._rand = new Date().getTime()
-        let src = this.config._url + '?' + this.objToParams(obj)
-        if (window.navigator) {
-            window.navigator.sendBeacon(src)
+        let src = this.option.url + '?' + this.objToParams(obj)
+        if (this.option.method==='post' && window.navigator.sendBeacon) {
+            window.navigator.sendBeacon(this.option.url, JSON.stringify(obj))
         } else {
             imageElement.src = src
         }
@@ -114,7 +114,8 @@ let show = () => {
     })
 }
 
-setTimeout(show, 10)
+document.addEventListener("DOMContentLoaded",show)
 window.addEventListener('scroll', debounce(show))
+window.addEventListener('resize', debounce(show))
 
 module.exports = UATrace
