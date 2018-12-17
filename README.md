@@ -1,7 +1,7 @@
 # ua-trace
 A resolution of collect dom attribute and merge with config then report(multi)，monitor appears in viewport  and click event, Works in web browsers.
 
-boss前端上报，也支持其他GET方式上报。主要解决滚动曝光及多个上报问题。
+GET前端上报,主要解决滚动曝光及多个上报问题。
 
 
 [demo](http://lichspace.github.io/ua-trace-demo/)
