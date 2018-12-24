@@ -46,6 +46,10 @@ class UATrace {
         }
     }
 
+    static trigger () {
+        show()
+    }
+
     update (config) {
         this.config = config
     }

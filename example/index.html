@@ -28,6 +28,11 @@
     UATrace.debug()
     let imageGif = '/report.gif'
     let boss6014 = new UATrace({url:imageGif},{id:6014})
+
+    setTimeout(()=>{
+        UATrace.trigger()
+    },3000)
+
     boss6014.subscribe((data,type)=>{
         if(type==='expose'){
             data.expose = 'expose'

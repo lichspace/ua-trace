@@ -87,6 +87,10 @@ report with js direct
 
 ## UATrace.update(config)
 
+## UATrace.trigger()
+
+when `DOMContentLoaded` `scroll` `resize` it will be trigger , also you can trigger with this method
+
 ## priority config
 配置的优先级
 `subscribe return` > `data-ua-trace` > `config`
