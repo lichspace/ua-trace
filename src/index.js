@@ -5,7 +5,6 @@ let inview = require('./lib/invew')
 let debounce = require('./lib/debounce')
 let EventEmitter = require('events')
 let Emitter = new EventEmitter()
-let imageElement = new window.Image(1,1)
 let debugColors = require('./lib/colors')
 
 // tool
@@ -29,7 +28,7 @@ let toPairs = obj => {
 }
 
 class UATrace {
-    constructor (option,config={}) {
+    constructor (option,config = {}) {
         if (!isObject(option) || !isObject(config)) {
             throw new Error('ua-trace: option and config must be object')
         }
@@ -86,10 +85,10 @@ class UATrace {
     imageSrcGet (obj) {
         obj._rand = new Date().getTime()
         let src = this.option.url + '?' + this.objToParams(obj)
-        if (this.option.method==='post' && window.navigator.sendBeacon) {
+        if (this.option.method === 'post' && window.navigator.sendBeacon) {
             window.navigator.sendBeacon(this.option.url, JSON.stringify(obj))
         } else {
-            imageElement.src = src
+            new window.Image(1, 1).src = src
         }
     }
 }
@@ -114,7 +113,7 @@ let show = () => {
     })
 }
 
-document.addEventListener("DOMContentLoaded",show)
+document.addEventListener('DOMContentLoaded', show)
 window.addEventListener('scroll', debounce(show))
 window.addEventListener('resize', debounce(show))
 
