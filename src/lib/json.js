@@ -5,7 +5,7 @@ module.exports = {
         try {
             return JSON.parse(str)
         } catch (e) {
-            debug("%c JSON.parse failed, try parse json myself ",debugColors.warn,str)
+            debug('%c JSON.parse failed, try parse to json ', debugColors.warn, str)
             let jsonStr = str.trim()
             if (jsonStr.substr(0, 1) === '[') {
                 jsonStr = jsonStr.replace(/'/g, '"')
@@ -17,8 +17,8 @@ module.exports = {
                 arr.map(v => {
                     if (v) {
                         let kv = v.match(/(\w+).?:(['"]?)(.*?)("|'|$)/)
-                        if(kv){
-                            obj[kv[1]] = kv[2]?kv[3]:(kv[3]|0)
+                        if (kv) {
+                            obj[kv[1]] = kv[2] ? kv[3] : (kv[3] | 0)
                         }
                     }
                 })

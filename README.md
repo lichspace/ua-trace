@@ -79,8 +79,11 @@ update your config
 - `type` is [click or expose],expose only fire once
 - you can define a function change data by `UATrace.subscribe`, when return false do not initiate [GET]
 
-## UATrace.report(object)
-report with js
+## UATrace.report(object,[type])
+report with js, also send to UATrace.subscribe
+
+## UATrace.reportDirect(object,[type])
+report with js direct
 
 ## UATrace.update(config)
 

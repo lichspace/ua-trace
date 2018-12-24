@@ -56,11 +56,15 @@ class UATrace {
                 console.warn('【ua-trace】data-ua-trace value cont parse to json')
             }
             let newData = cb ? cb(data, type) : data
-            newData && this.report(newData,type)
+            newData && this.reportDirect(newData, type)
         })
     }
 
     report (obj, type) {
+        Emitter.emit('reportAll', obj, type || 'js')
+    }
+
+    reportDirect (obj, type) {
         if (typeof (obj) === 'object') {
             let newData = { ...this.config, ...obj }
             debug(`%c report：${type || 'JS'} `, debugColors.success, newData)
