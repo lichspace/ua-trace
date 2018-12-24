@@ -56,9 +56,6 @@ class UATrace {
     // 数据接收并处理->report
     subscribe (cb) {
         Emitter.on('reportAll', (data, type) => {
-            if (!isObject(data)) {
-                console.warn('【ua-trace】data-ua-trace value cont parse to json')
-            }
             let newData = cb ? cb(data, type) : data
             newData && this.reportDirect(newData, type)
         })

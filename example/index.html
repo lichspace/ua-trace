@@ -22,6 +22,7 @@
         </li>
     </div>
     <div class="c b" data-ua-trace="{sop:'bottom'}"></div>
+    <div class="c b" data-ua-trace="footer"></div>
 </div>
 <script src="/ua-trace.js"></script>
 <script>
@@ -34,12 +35,18 @@
     },3000)
 
     boss6014.subscribe((data,type)=>{
+        //one key shortcut
+        if(typeof(data) === 'string'){
+            return {yourKey:data}
+        }
         if(type==='expose'){
             data.expose = 'expose'
         }
         return data
         //if return false will not request
     })
+
+    //use js report
     boss6014.report({name:'tangentguo'})
 
     for(var i = 0;i<10;i++){

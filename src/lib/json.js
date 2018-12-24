@@ -24,7 +24,7 @@ module.exports = {
                 })
                 return obj
             }
-            return {}
+            return str
         }
     }
 }

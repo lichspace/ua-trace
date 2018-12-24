@@ -3,6 +3,12 @@ A resolution of collect dom attribute and merge with config then report(multi)�
 
 GET前端上报,主要解决滚动曝光及多个上报问题。
 
+# feature
+- auto encodeURIComponent value
+- auto detect elm in view
+- one set multi use
+
+
 
 [demo](http://lichspace.github.io/ua-trace-demo/)
 
@@ -26,40 +32,47 @@ Browser`umd`
 
 # Usage
 
-The ua-trace lib do a thing, that if a element has `data-ua-trace` ,  when it appear in window or click,it value will be parse to json and merge with the config you identified
+The ua-trace lib do one thing, that if a element has `data-ua-trace` ,  when it appear in window or click,it value will be parse to json and merge with the config you identified
 
 ua-trace只做一件事情，在曝光或点击的时候，把DOM里`data-ua-trace`的JSON配置与预定义的基础配置合并发送到订阅函数里
 
 ## Class UATrace(option[object],config[object])
-- option.url to report 上报地址
-- option.method default get with image,if post will use sendBeacon 上报方式
+- *option.url[requried] to report 上报地址
+- option.method default [get] with image,if [post] will use sendBeacon 上报方式
 - config the base config to report 基础配置
 
 
 HTML
 ```
 //Element　must has attrbute data-ua-trace
-<div data-ua-trace='{"explore":"once","a":1,"b":2}'></div>
+<div data-ua-trace='{"key1":"once","a":1,"b":2}'></div>
 
 //or js react
-<div data-ua-trace={JSON.stringify({"explore":"once","a":1,"b":2})}'></div>
+<div data-ua-trace={JSON.stringify({"key1":"once","a":1,"b":2})}'></div>
 
 ```
 
 JS
 ```
 console.log('ua-trace version:',UATrace.version())
-    UATrace.debug()
-    let imageGif = '/report.gif'
-    let boss6014 = new UATrace({url:imageGif,method:'post'},{id:6014})
-    boss6014.subscribe((data,type)=>{
-        if(type==='expose'){
-            data.expose = 'expose'
-        }
-        return data
-        //if return false will not request
-    })
-    boss6014.report({name:'tangentguo'})
+UATrace.debug()
+let imageGif = '/report.gif'
+let boss6014 = new UATrace({url:imageGif,method:'post'},{id:6014})
+// pick your data
+boss6014.subscribe((data,type)=>{
+    //one key shortcut: data-ua-trace='value'
+    if(typeof(data) === 'string'){
+            return {yourKey:data}
+    }
+    // expose or click
+    if(type==='expose'){
+        data.expose = 'expose'
+    }
+
+    return data
+    //if return false will do nothing
+})
+boss6014.report({name:'tangentguo'})
 //when subscribed click or inview will Request URL: http://report.com?a=1&b=2&expose=expose&id=6014
 
 ```
@@ -68,7 +81,7 @@ console.log('ua-trace version:',UATrace.version())
 
 ## static UATrace.debug()
 equal localStorage.setItem('debug', 'ua-trace')
--  default open
+-  default close
 - 'close' close
 
 ## UATrace.update(config)
@@ -77,10 +90,10 @@ update your config
 ## UATrace.subscribe([Function(data,type)])
 - `data` is the data-ua-trace parse to json
 - `type` is [click or expose],expose only fire once
-- you can define a function change data by `UATrace.subscribe`, when return false do not initiate [GET]
+- you can pick your data by `UATrace.subscribe`, when return false do nothing
 
 ## UATrace.report(object,[type])
-report with js, also send to UATrace.subscribe
+report with js will go throw `UATrace.subscribe`
 
 ## UATrace.reportDirect(object,[type])
 report with js direct
@@ -88,8 +101,7 @@ report with js direct
 ## UATrace.update(config)
 
 ## UATrace.trigger()
-
-when `DOMContentLoaded` `scroll` `resize` it will be trigger , also you can trigger with this method
+when `DOMContentLoaded` `scroll` `resize`  will be trigger detect elm inview, also you can trigger with this method yourself
 
 ## priority config
 配置的优先级
