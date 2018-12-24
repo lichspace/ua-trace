@@ -103,7 +103,7 @@ delegate(selector, 'click', function (e) {
 
 let show = () => {
     let elms = document.querySelectorAll(selector)
-    Array.prototype.slice.call(elms).map( elm => {
+    Array.prototype.slice.call(elms).map(elm => {
         // 没曝光过，并且有data-uatrace,可见
         if (!elm.exposed && inview(elm)) {
             let data = getDataFromDataSet(elm)
