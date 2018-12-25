@@ -54,7 +54,6 @@ HTML
 
 JS
 ```
-console.log('ua-trace version:',UATrace.version())
 UATrace.debug()
 let imageGif = '/report.gif'
 let boss6014 = new UATrace({url:imageGif,method:'post'},{id:6014})
@@ -76,8 +75,6 @@ boss6014.report({name:'tangentguo'})
 //when subscribed click or inview will Request URL: http://report.com?a=1&b=2&expose=expose&id=6014
 
 ```
-
-## static UATrace.version()
 
 ## static UATrace.debug()
 equal localStorage.setItem('debug', 'ua-trace')
