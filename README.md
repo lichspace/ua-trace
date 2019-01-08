@@ -85,7 +85,7 @@ equal localStorage.setItem('debug', 'ua-trace')
 update your config
 
 ## UATrace.subscribe([Function(data,type)])
-- `data` is the data-ua-trace parse to json
+- `data`[immutable data] is the data-ua-trace parse to json
 - `type` is [click or expose],expose only fire once
 - you can pick your data by `UATrace.subscribe`, when return false do nothing
 
